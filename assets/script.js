@@ -9,7 +9,7 @@ console.log(currentDay)
 var toJSON = function(response) {
   return response.json();
 };
-
+// Allows the weather to be shown on the page by creating elements and appending them. 
 var displayWeather  = function (data, city) {
   console.log(data);
   currentEl.innerHTML = null;
@@ -42,7 +42,7 @@ var displayWeather  = function (data, city) {
   h2El.appendChild(timeEl);
   
 
-  
+  // Shows the 5 days of the weather using a for loop to create each element with a different day and weather. Picked at index 1 - 6 ie slice, to start with the next day's weather. 
   var dispFiveDay = data.daily.slice(1,6);
   fiveDayEl.innerHTML = null;
   for (var day of dispFiveDay) {
@@ -79,7 +79,7 @@ var displayWeather  = function (data, city) {
 
   console.log('HI', dispFiveDay);
 };
-
+// Creates the button on the page that allows you to go back to a previous search. 
 displayBtn = function(city) {
   var cities = JSON.parse(localStorage.getItem('cities')) || [];
   var limitCities = cities.slice(cities.length - 5);  
@@ -101,7 +101,7 @@ var getOneCall = function (city){
         displayWeather(data, city);
       });
 };
-
+// Saves your previous search to your local database
 var saveToLocalStorage = function (city) {
   var cities = JSON.parse(localStorage.getItem('cities')) || [];
   cities.push(city);
@@ -119,6 +119,7 @@ var getGEO = function (locations) {
   getOneCall(city);
 };
 
+// setting up event listeners and how they will function. 
 
 var handleSearch = function(event) {
  event.preventDefault(); 
