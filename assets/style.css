@@ -1,0 +1,19 @@
+h2 {
+  text-align: center;
+  color: white;
+}
+
+#current-info {
+  display: flex;
+  align-items: center;
+}
+
+body {
+  background-image: url(https://www.noaa.gov/sites/default/files/styles/landscape_width_1275/public/legacy/image/2019/Jun/iStock-477110708%20%281%29.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+ #five{
+  display: flex;
+  column-gap: 45px;
+ }
