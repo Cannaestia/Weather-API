@@ -13,7 +13,8 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
- #five{
+ #five-day{
   display: flex;
   column-gap: 45px;
+  text-align: center;
  }

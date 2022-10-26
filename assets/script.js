@@ -1,8 +1,7 @@
 var apiKey = '485bbc753e29e9770f09ca55c32c6d79';
-
+var q = 'Charlotte';
 var currentEl = document.querySelector('#current');
 var curInfoEl = document.querySelector('#current-info');
-var fiveDayEl = document.querySelector('#five-day');
 var currentDay = moment().format('MMMM Do YYYY, h:mm a');
 var searchEl = document.querySelector('#searchCity');
 var searchInputEl = document.querySelector('#searchInput');
@@ -13,6 +12,10 @@ var toJSON = function(response) {
 
 var displayWeather  = function (data, city) {
   console.log(data);
+  currentEl.innerHTML = null;
+  curInfoEl.innerHTML = null;
+  currentDay.innerHTML = null;
+  var fiveDayEl = document.querySelector('#five-day');
   var h2El = document.createElement('h2');
   var timeEl = document.createElement('h4');
   var tempEl = document.createElement('p');
@@ -41,6 +44,36 @@ var displayWeather  = function (data, city) {
 
   
   var dispFiveDay = data.daily.slice(1,6);
+  fiveDayEl.innerHTML = null;
+  for (var day of dispFiveDay) {
+  var date = new Date(day.dt * 1000).toLocaleDateString();
+  var temp = day.temp.day;
+  var colEl = document.createElement('div');
+  var cardEl = document.createElement('div');
+  var dateEl = document.createElement('p');
+  var tempEl = document.createElement('p');
+  var humEl = document.createElement('p');
+  var windEl = document.createElement('p');
+  var imageEl = document.createElement('img');
+  var icon = day.weather[0].icon;
+  imageEl.src = `https://openweathermap.org/img/wn/${icon}@2x.png`;
+  imageEl.height = 40;
+  imageEl.width = 40;
+  colEl.className = "card col-2 col-s p-3"
+  dateEl.textContent = date;
+  tempEl.textContent = 'TEMP: ' + temp + ' °F';
+  humEl.textContent = 'HUMIDITY: ' + day.humidity + '%';
+  windEl.textContent = 'WIND: ' + day.wind_speed + ' MPH';
+  fiveDayEl.append(colEl);
+  colEl.append(cardEl);
+  cardEl.append(dateEl);
+  cardEl.append(imageEl);
+  cardEl.append(tempEl);
+  cardEl.append(humEl);
+  cardEl.append(windEl);
+  
+
+  }
  
 
 
@@ -72,7 +105,8 @@ var getOneCall = function (city){
 var saveToLocalStorage = function (city) {
   var cities = JSON.parse(localStorage.getItem('cities')) || [];
   cities.push(city);
-  var data = JSON.stringify(cities);
+  var arrayCity = Array.from(new Set(cities));
+  var data = JSON.stringify(arrayCity);
   localStorage.setItem('cities', data);
 };
 
