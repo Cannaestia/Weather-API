@@ -125,7 +125,7 @@ var handleSearch = function(event) {
  event.preventDefault(); 
  if (event.target.matches('button')) {
  var q = document.querySelector('#cityName');
- var geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${q.value}&appid=${apiKey}`;
+ var geoURL = `https://api.openweathermap.org/geo/1.0/direct?q=${q.value}&appid=${apiKey}`;
  q.value = '';
  fetch(geoURL)
    .then(toJSON)
@@ -136,7 +136,7 @@ var handleSearch = function(event) {
 var handleCityClick = function (event) {
   event.preventDefault(); 
   var q = event.target.textContent;
-  var geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${q}&appid=${apiKey}`;
+  var geoURL = `https://api.openweathermap.org/geo/1.0/direct?q=${q}&appid=${apiKey}`;
   q.value = '';
   fetch(geoURL)
     .then(toJSON)
