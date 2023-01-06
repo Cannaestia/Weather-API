@@ -9,6 +9,27 @@ console.log(currentDay)
 var toJSON = function(response) {
   return response.json();
 };
+
+function getWeather(q = 'Charlotte') {
+  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${q}&appid=${apiKey}`)
+    .then(toJSON)
+    .then(function (data) {
+      var city = data;
+      fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&exclude=minutely&appid=${apiKey}`)
+        .then(toJSON)
+        .then(function(data) {
+          displayWeather(data, city);
+        });
+    });
+}
+
+getWeather();
+searchEl.addEventListener('submit', function(event) {
+  event.preventDefault();
+  var searchInput = searchInputEl.value;
+  getWeather(searchInput);
+});
+
 // Allows the weather to be shown on the page by creating elements and appending them. 
 var displayWeather  = function (data, city) {
   console.log(data);
